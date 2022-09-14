@@ -34,9 +34,11 @@ Net_DNS2_Lookups::$digest_name_to_id    = array_flip(Net_DNS2_Lookups::$digest_i
 Net_DNS2_Lookups::$rr_qtypes_by_id      = array_flip(Net_DNS2_Lookups::$rr_qtypes_by_name);
 Net_DNS2_Lookups::$rr_metatypes_by_id   = array_flip(Net_DNS2_Lookups::$rr_metatypes_by_name);
 Net_DNS2_Lookups::$protocol_by_id       = array_flip(Net_DNS2_Lookups::$protocol_by_name);
+Net_DNS2_Lookups::$svcparam_keys_by_id  = array_flip(Net_DNS2_Lookups::$svcparam_keys_by_name);
+Net_DNS2_Lookups::$svcparam_class_to_id = array_flip(Net_DNS2_Lookups::$svcparam_id_to_class);
 
 /**
- * This class provides simple lookups used througout the Net_DNS2 code
+ * This class provides simple lookups used throughout the Net_DNS2 code
  * 
  */
 class Net_DNS2_Lookups
@@ -285,8 +287,8 @@ class Net_DNS2_Lookups
         'OPENPGPKEY'    => 61,      // RFC 7929
         'CSYNC'         => 62,      // RFC 7477
         'ZONEMD'        => 63,      // Not implemented yet
-        'SVCB'          => 64,      // Not implemented yet
-        'HTTPS'         => 65,      // Not implemented yet
+        'SVCB'          => 64,      // https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https/
+        'HTTPS'         => 65,      // https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https/
 
                                     // 66 - 98 unassigned
 
@@ -398,6 +400,8 @@ class Net_DNS2_Lookups
         60          => 'Net_DNS2_RR_CDNSKEY',
         61          => 'Net_DNS2_RR_OPENPGPKEY',
         62          => 'Net_DNS2_RR_CSYNC',
+        64          => 'Net_DNS2_RR_SVCB',
+        65          => 'Net_DNS2_RR_HTTPS',
         99          => 'Net_DNS2_RR_SPF',
         104         => 'Net_DNS2_RR_NID',
         105         => 'Net_DNS2_RR_L32',
@@ -557,5 +561,29 @@ class Net_DNS2_Lookups
         'WB-EXPAK'      => 79
         // 80 - 254     - Unassigned
         // 255          - Reserved
+    ];
+
+    /*
+     * SVCB SvcParamKeys - https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https/
+     */
+    public static $svcparam_keys_by_id = [];
+    public static $svcparam_keys_by_name = [
+        'mandatory'         => 0,
+        'alpn'              => 1,
+        'no_default_alpn'    => 2,
+        'port'              => 3,
+        'ipv4hint'          => 4,
+        'ech'               => 5,
+        'ipv6hint'          => 6
+    ];
+    public static $svcparam_class_to_id = [];
+    public static $svcparam_id_to_class = [
+        0   => 'Net_DNS2_SvcParam_Mandatory',
+        1   => 'Net_DNS2_SvcParam_ALPN',
+        2   => 'Net_DNS2_SvcParam_NoDefaultALPN',
+        3   => 'Net_DNS2_SvcParam_Port',
+        4   => 'Net_DNS2_SvcParam_IPv4Hint',
+        5   => 'Net_DNS2_SvcParam_ECH',
+        6   => 'Net_DNS2_SvcParam_IPv6Hint'
     ];
 }
