@@ -24,24 +24,4 @@ class Net_DNS2_SvcParam_NoDefaultALPN extends Net_DNS2_SvcParam
         // no_default_alpn has no values.  Either exists (true) or doesn't (false)
         return $this->name;
     }
-
-    protected function svcParamToString()
-    {
-        // TODO: Implement svcParamToString() method.
-    }
-
-    protected function svcParamFromString(array $data)
-    {
-        // TODO: Implement svcParamFromString() method.
-    }
-
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        // TODO: Implement rrSet() method.
-    }
-
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        // TODO: Implement rrGet() method.
-    }
 }

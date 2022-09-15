@@ -52,24 +52,4 @@ class Net_DNS2_SvcParam_ECH extends Net_DNS2_SvcParam
     {
         return $this->name . '=' . base64_encode($this->ech);
     }
-
-    protected function svcParamToString()
-    {
-        // TODO: Implement svcParamToString() method.
-    }
-
-    protected function svcParamFromString(array $data)
-    {
-        // TODO: Implement svcParamFromString() method.
-    }
-
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        // TODO: Implement rrSet() method.
-    }
-
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        // TODO: Implement rrGet() method.
-    }
 }
