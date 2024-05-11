@@ -41,6 +41,7 @@ const PORT = 3;
 const IPV4HINT = 4;
 const ECH = 5;
 const IPV6HINT = 6;
+const DOHPATH = 7;
 
 abstract class Net_DNS2_SvcParam
 {
