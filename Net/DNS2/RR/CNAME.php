@@ -42,7 +42,7 @@ class Net_DNS2_RR_CNAME extends Net_DNS2_RR
      */
     protected function rrToString()
     {
-        return $this->cleanString($this->cname) . '.';
+        return $this->cleanString($this->cname);
     }
 
     /**
@@ -74,7 +74,7 @@ class Net_DNS2_RR_CNAME extends Net_DNS2_RR
         if ($this->rdlength > 0) {
 
             $offset = $packet->offset;
-            $this->cname = Net_DNS2_Packet::expand($packet, $offset);
+            $this->cname = Net_DNS2_Packet::expand($packet, $offset) . '.';
 
             return true;
         }
@@ -102,4 +102,10 @@ class Net_DNS2_RR_CNAME extends Net_DNS2_RR
 
         return null;
     }
+
+    public function cleanString($data)
+    {
+        return strtolower($data);
+    }
+
 }
