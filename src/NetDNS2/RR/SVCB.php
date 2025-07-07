@@ -177,6 +177,54 @@ class SVCB extends \NetDNS2\RR
         return $out;
     }
 
+    public function svcParamsToString(): string
+    {
+        $out = "";
+
+        foreach($this->svc_params as $service => $values)
+        {
+            switch(self::service_name_to_id($service))
+            {
+                case self::SVCB_PARAM_MANDATORY:
+                case self::SVCB_PARAM_IPV4HINT:
+                case self::SVCB_PARAM_IPV6HINT:
+                case self::SVCB_PARAM_TLS_SUPP_GROUPS:
+                    {
+                        $out .= ' ' . $service . '=' . implode(',', $values);
+                    }
+                    break;
+                case self::SVCB_PARAM_ALPN:
+                    {
+                        $out .= ' ' . $service . '="' . implode(',', $values) . '"';
+                    }
+                    break;
+                case self::SVCB_PARAM_PORT:
+                case self::SVCB_PARAM_ECH:
+                case self::SVCB_PARAM_DOHPATH:
+                    {
+                        $out .= ' ' . $service . '=' . $values;
+                    }
+                    break;
+                case self::SVCB_PARAM_NO_DEFAULT_ALPN:
+                case self::SVCB_PARAM_OHTTP:
+                    {
+                        $out .= ' ' . $service;
+                    }
+                    break;
+                default:
+                    {
+                        if (strncmp($service, 'key', 3) == 0)
+                        {
+                            $out .= ' ' . $service . '="' . $values . '"';
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return $out;
+    }
+
     /**
      * @see \NetDNS2\RR::rrFromString()
      */
