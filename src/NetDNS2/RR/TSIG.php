@@ -121,10 +121,10 @@ final class TSIG extends \NetDNS2\RR
     {
         $this->rrFromString([ $_signature ]);
 
-        $this->name      = new \NetDNS2\Data\Domain(\NetDNS2\Data::DATA_TYPE_RFC1035, trim($_keyname));
+        $this->name      = new \NetDNS2\Data\Domain(\NetDNS2\Data::DATA_TYPE_RFC2535, trim($_keyname));
         $this->ttl       = 0;
         $this->class     = \NetDNS2\ENUM\RR\Classes::set('ANY');
-        $this->algorithm = new \NetDNS2\Data\Domain(\NetDNS2\Data::DATA_TYPE_CANON, $_algorithm);
+        $this->algorithm = new \NetDNS2\Data\Domain(\NetDNS2\Data::DATA_TYPE_RFC2535, $_algorithm);
     }
 
     /**
@@ -292,7 +292,7 @@ final class TSIG extends \NetDNS2\RR
         //
         // add the algorithm name without compression
         //
-        $sig_data .= $this->algorithm->encode();
+        $sig_data .= $this->algorithm->encode($o);
 
         //
         // add the rest of the values
@@ -322,7 +322,7 @@ final class TSIG extends \NetDNS2\RR
         //
         // compress the algorithm
         //
-        $data = $this->algorithm->encode();
+        $data = $this->algorithm->encode($o);
 
         //
         // pack the time, fudge and mac size
